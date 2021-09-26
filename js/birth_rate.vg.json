@@ -1,0 +1,31 @@
+{
+    "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+    "title": "birth rate  (2020)",
+    "width": 800,
+    "height": 600,
+    "projection": {"type": "equirectangular"},
+    "data": {
+    "url": "https://raw.githubusercontent.com/KaneSec/vega_lite/main/3_choropleth_map/js/ne_110m_admin_0_countries.topojson",
+    "format": {"type": "topojson", "feature": "ne_110m_admin_0_countries"}
+    },
+    "transform": [ {
+    "lookup": "properties.NAME",
+    "from": {
+    "data": {
+    "url": "https://raw.githubusercontent.com/zhuolangli/Homework-week9/main/birth%20rate%202020.csv"
+    },
+    "key": "country_name",
+    "fields": ["crude_birth_rate"] } }
+    ],
+    "mark": {"type": "geoshape"},
+    "encoding": {
+    "color": {
+    "field": "crude_birth_rate",
+    "type": "quantitative",
+    "scale": {
+    "type": "threshold",
+    "domain": [5, 15, 35],
+    "range": ["#fdbe85", "#fd8d3c", "#e6550d", "#a63603"] }
+    },
+    "tooltip": [ {"field": "properties.NAME", "type": "nominal", "title": "country_name"},
+    {"field": "crude_birth_rate", "type": "quantitative"} ] } }
